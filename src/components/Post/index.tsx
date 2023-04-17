@@ -311,8 +311,6 @@ export function Post({ post }: PostType) {
           <Price>{String(post.price).length > 0 ? `R$${post.price}` : 'Free'}</Price>
 
 
-
-
         </EventDate>
       </InformationContainer>
       <Line />
