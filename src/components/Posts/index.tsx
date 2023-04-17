@@ -1,4 +1,4 @@
-import { Post } from "@/src/Post";
+import { Post } from "@/src/components/Post";
 import { useEffect, useState } from "react";
 import { Container } from "./styles";
 
@@ -242,7 +242,8 @@ export function Posts({ variant }: FilterProps) {
 
   useEffect(() => {
     getEvents()
-  }, [variant])
+    console.log('useEffect -------------------------------------------')
+  },)
 
   if (data.length < 1) {
     return (

@@ -128,57 +128,62 @@ export function CreateEventModal() {
             <X size={24} />
           </CloseButton>
           {/* <span>{title}</span> */}
-          <form action="">
+          {session?.user ? (
+            <form action="">
 
-            <input type="text" placeholder="Event title"
-              onChange={(e) => setTitle(e.target.value)} />
+              <input type="text" placeholder="Event title"
+                onChange={(e) => setTitle(e.target.value)} />
 
 
-            <input type="text" placeholder="Caption, máx 40 letters"
-              maxLength={40} onChange={(e) => setCaption(e.target.value)} />
+              <input type="text" placeholder="Caption, máx 40 letters"
+                maxLength={40} onChange={(e) => setCaption(e.target.value)} />
 
-            <textarea placeholder="URL image cover"
-              onChange={(e) => setUrlCover(e.target.value)} />
+              <textarea placeholder="URL image cover"
+                onChange={(e) => setUrlCover(e.target.value)} />
 
-            <label htmlFor="">
-              <span>Máximo de letras </span>
-              <span>{maxDescriptionLength - descriptionLength} restante</span>
-            </label>
-            <textarea placeholder="Description"
-              onChange={handleDescriptionChange} />
+              <label htmlFor="">
+                <span>Máximo de letras </span>
+                <span>{maxDescriptionLength - descriptionLength} restante</span>
+              </label>
+              <textarea placeholder="Description"
+                onChange={handleDescriptionChange} />
 
-            <input type="datetime-local" name="start_date" id=""
-              onChange={(e) => setStartDate(e.target.value)} />
+              <input type="datetime-local" name="start_date" id=""
+                onChange={(e) => setStartDate(e.target.value)} />
 
-            <input type="datetime-local" name="end_date" id=""
-              onChange={(e) => setAndDate(e.target.value)} />
+              <input type="datetime-local" name="end_date" id=""
+                onChange={(e) => setAndDate(e.target.value)} />
 
-            <input type="text" placeholder="Location URL"
-              onChange={(e) => setLocation(e.target.value)} />
+              <input type="text" placeholder="Location URL"
+                onChange={(e) => setLocation(e.target.value)} />
 
-            <label about="Categories">Choose a category:</label>
+              <label about="Categories">Choose a category:</label>
 
-            <select id="categories" name="categories"
-              onChange={(e) => setCategory(e.target.value)}>
+              <select id="categories" name="categories"
+                onChange={(e) => setCategory(e.target.value)}>
 
-              <option value="">--Select a category--</option>
+                <option value="">--Select a category--</option>
 
-              {categories.map((item) => (
-                <option key={item.id} value={item.id}>{item.name}</option>
-              ))}
+                {categories.map((item) => (
+                  <option key={item.id} value={item.id}>{item.name}</option>
+                ))}
 
-            </select>
+              </select>
 
-            <input type="text" placeholder="Price"
-              onChange={(e) => setPrice(e.target.value)} />
+              <input type="text" placeholder="Price"
+                onChange={(e) => setPrice(e.target.value)} />
 
-            <input type="text" placeholder="URL of your page"
-              onChange={(e) => setEventUrl(e.target.value)} />
+              <input type="text" placeholder="URL of your page"
+                onChange={(e) => setEventUrl(e.target.value)} />
 
-            <button type='submit' onClick={handleCreatePost}>
-              Create event
-            </button>
-          </form>
+              <button type='submit' onClick={handleCreatePost}>
+                Create event
+              </button>
+            </form>
+          ) : (
+            <span>Você precisa estar logado para criar um evento!</span>
+          )}
+
         </Content>
       </Container>
       <Overlay />

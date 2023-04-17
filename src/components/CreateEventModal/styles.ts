@@ -115,6 +115,11 @@ export const Content = styled(Dialog.Content)`
       }
     }
   }
+
+  span {
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.colors.white};
+  }
 `
 
 export const CloseButton = styled(Dialog.Close)`

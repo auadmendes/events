@@ -33,7 +33,7 @@ import {
   Smiley
 } from "phosphor-react";
 import { useEffect, useState } from "react";
-import { Comments } from "../components/Comments";
+import { Comments } from "../Comments";
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -224,7 +224,9 @@ export function Post({ post }: PostType) {
     getLikesCount(post.id)
     getAttendeesCount(post.id)
 
-  }, [])
+    console.log('affffffffffff')
+
+  }, [session?.user, getLikesCount, post.id, getAttendeesCount])
 
   return (
     <Container>

@@ -3,11 +3,18 @@ import { prisma } from "./prisma";
 export async function getAllPosts(category_id: string) {
   const posts = await prisma.post.findMany({
     take: 10,
+    // where: {
+    //   categoryId: {
+    //     not: undefined,
+    //     in: category_id  
+    //   },
+      
+    // },
     where: {
-      categoryId: {
-        not: undefined || category_id,
-        
-      },
+      OR: [
+        { categoryId: category_id },
+        { NOT: { categoryId: category_id } },
+      ]
     },
     select: {
       id: true,
@@ -68,4 +75,5 @@ export async function getAllPosts(category_id: string) {
 
   return postsWithDetails
 }
+
 
