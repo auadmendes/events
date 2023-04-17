@@ -218,32 +218,36 @@ export function Posts({ variant }: FilterProps) {
   const [data, setData] = useState<PostType[]>([]);
 
 
-  async function getEvents() {
-    let filterCategoryId
 
-    if (variant === '') {
-      filterCategoryId = undefined
-    } else {
-      filterCategoryId = variant
-    }
-
-    try {
-      const response = await fetch(`/api/posts?category_id=${filterCategoryId}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch events');
-      }
-      const eventsData = await response.json();
-      setData(eventsData.data);
-
-    } catch (err) {
-      console.log('Error: ', err)
-    }
-  }
 
   useEffect(() => {
+
+    async function getEvents() {
+      let filterCategoryId
+
+      if (variant === '') {
+        filterCategoryId = undefined
+      } else {
+        filterCategoryId = variant
+      }
+
+      try {
+        const response = await fetch(`/api/posts?category_id=${filterCategoryId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch events');
+        }
+        const eventsData = await response.json();
+        setData(eventsData.data);
+
+      } catch (err) {
+        console.log('Error: ', err)
+      }
+    }
+
+
     getEvents()
     console.log('useEffect -------------------------------------------')
-  },)
+  }, [variant])
 
   if (data.length < 1) {
     return (
