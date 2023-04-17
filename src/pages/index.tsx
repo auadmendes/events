@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Feed } from '../components/Feed'
-import { Container } from './Home'
+import { Container } from '../styles/Home'
 
 export default function Home() {
   return (
