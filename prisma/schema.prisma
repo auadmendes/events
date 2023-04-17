@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  //previewFeatures = ["referentialIntregrity"]
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+// model User {
+//   id         String   @id @default(uuid())
+//   name       String
+//   email      String   @unique
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
+
+//   @@map("users")
+// }
+
+model Category {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model Attendee {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user_name  String
+  user_email String @unique
+  post_id    String
+
+  @@map("attendees")
+}
+
+model Like {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  post_id    String?
+  user_email String  @unique
+
+  @@map("likes")
+}
+
+model Comment {
+  id      String @id @default(uuid())
+  comment String
+
+  post_id String
+
+  user_email String
+  user_name  String
+  user_image String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("comments")
+}
+
+model Post {
+  id           String   @id @default(uuid())
+  title        String
+  imageUrl     String
+  caption      String?
+  description  String?  @db.VarChar(1000)
+  start_time   String
+  end_time     String
+  location     String?
+  maxAttendees String?
+  price        String?
+  eventUrl     String?
+  eventActive  Boolean
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  user_image String
+  user_email String
+  user_name  String
+  categoryId String
+
+  @@map("posts")
+}
