@@ -218,8 +218,6 @@ export function Posts({ variant }: FilterProps) {
   const [data, setData] = useState<PostType[]>([]);
 
 
-
-
   useEffect(() => {
 
     async function getEvents() {
@@ -243,7 +241,6 @@ export function Posts({ variant }: FilterProps) {
         console.log('Error: ', err)
       }
     }
-
 
     getEvents()
     console.log('useEffect -------------------------------------------')

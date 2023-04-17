@@ -32,7 +32,7 @@ import {
   Chat,
   Smiley
 } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Comments } from "../Comments";
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -117,6 +117,56 @@ export function Post({ post }: PostType) {
     getLikesCount(post_id)
   }
 
+  // async function getAttendeesCount(post_id: string) {
+  //   const likesResponse = await fetch(`/api/attendees?post_id=${post_id}&user_email=${session?.user?.email}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+
+  //   })
+  //   const data = await likesResponse.json()
+  //   const attendeesCount = data.data.count
+
+  //   setAttendeesCount(attendeesCount)
+  //   setHasAttend(data.data.hasAttend)
+
+  //   return attendeesCount
+  // }
+
+  const getAttendeesCount = useCallback(async (post_id: string) => {
+    const likesResponse = await fetch(`/api/attendees?post_id=${post_id}&user_email=${session?.user?.email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    const data = await likesResponse.json()
+    const attendeesCount = data.data.count
+
+    setAttendeesCount(attendeesCount)
+    setHasAttend(data.data.hasAttend)
+
+    return attendeesCount
+  }, [session?.user?.email]);
+
+  const getLikesCount = useCallback(async (post_id: string) => {
+    const likesResponse = await fetch(`/api/likes?post_id=${post_id}&user_email=${session?.user?.email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    const data = await likesResponse.json();
+    const likesCount = data.data.count;
+
+    setLikesCount(likesCount);
+    setEmailHasLiked(data.data.hasLiked);
+
+    return likesCount;
+  }, [session?.user?.email]);
+
   // async function getLikesCount(post_id: string) {
   //   const likesResponse = await fetch(`/api/likes?post_id=${post_id}&user_email=${session?.user?.email}`, {
   //     method: 'GET',
@@ -132,39 +182,6 @@ export function Post({ post }: PostType) {
   //   setEmailHasLiked(data.data.hasLiked)
   //   return likesCount
   // }
-
-  async function getAttendeesCount(post_id: string) {
-    const likesResponse = await fetch(`/api/attendees?post_id=${post_id}&user_email=${session?.user?.email}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-
-    })
-    const data = await likesResponse.json()
-    const attendeesCount = data.data.count
-
-    setAttendeesCount(attendeesCount)
-    setHasAttend(data.data.hasAttend)
-
-    return attendeesCount
-  }
-
-  async function getLikesCount(post_id: string) {
-    const likesResponse = await fetch(`/api/likes?post_id=${post_id}&user_email=${session?.user?.email}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-
-    })
-    const data = await likesResponse.json()
-    const likesCount = data.data.count
-
-    setLikesCount(likesCount)
-    setEmailHasLiked(data.data.hasLiked)
-    return likesCount
-  }
 
   async function handleAttendee(post_id: string, user_email: string) {
     const response = await fetch('/api/attendees', {
@@ -237,45 +254,12 @@ export function Post({ post }: PostType) {
       setUserEmail(String(session?.user?.email))
     }
 
-    async function getLikesCount(post_id: string) {
-      const likesResponse = await fetch(`/api/likes?post_id=${post_id}&user_email=${session?.user?.email}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
-      })
-      const data = await likesResponse.json()
-      const likesCount = data.data.count
-
-      setLikesCount(likesCount)
-      setEmailHasLiked(data.data.hasLiked)
-      return likesCount
-    }
-
-    async function getAttendeesCount(post_id: string) {
-      const likesResponse = await fetch(`/api/attendees?post_id=${post_id}&user_email=${session?.user?.email}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
-      })
-      const data = await likesResponse.json()
-      const attendeesCount = data.data.count
-
-      setAttendeesCount(attendeesCount)
-      setHasAttend(data.data.hasAttend)
-
-      return attendeesCount
-    }
-
     getLikesCount(post.id)
     getAttendeesCount(post.id)
 
     console.log('affffffffffff')
 
-  }, [session?.user, post.id])
+  }, [session?.user, post.id, getAttendeesCount, getLikesCount])
 
   return (
     <Container>
