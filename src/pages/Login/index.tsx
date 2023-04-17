@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react"
-import { Container, LoginButton, LogoutButton, RegisterButton } from "./styles"
+import { Container, LoginButton, LogoutButton, RegisterButton } from "../../styles/styles"
 import { GoogleLogo } from 'phosphor-react'
 
 export default function Login() {
