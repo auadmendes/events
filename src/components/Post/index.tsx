@@ -305,7 +305,7 @@ export function Post({ post }: PostType) {
           variant={hasAttend}
         >
           <span>
-            {attendeesCount} engaged
+            {attendeesCount} participando
           </span>
         </Attendees>
         <Starred
