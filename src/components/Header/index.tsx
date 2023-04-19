@@ -33,10 +33,10 @@ export function Header() {
         <span>Event-ES</span>
       </Logo>
 
-      <SearchBar>
+      {/* <SearchBar>
         <MagnifyingGlass size={24} />
         <input type="text" placeholder="Search" />
-      </SearchBar>
+      </SearchBar> */}
 
       <Menu>
         <span>

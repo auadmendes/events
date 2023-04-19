@@ -1,12 +1,12 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-export const Container = styled.header`
+export const Container = styled.div`
+//background-color: red;
   width: 100%;
   display: flex;
   justify-content: space-between;
   position: relative;
-  top: 0;
   gap: 0.25rem;
   z-index: 999;
 
@@ -14,15 +14,13 @@ export const Container = styled.header`
   height: 3.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
 
-  -webkit-box-shadow: 0 4px 6px -8px #222;
-  -moz-box-shadow: 0 4px 6px -8px #222;
   box-shadow: 0 4px 6px -8px #222;
 
   @media (max-width: 720px) {
-      padding: 1rem 1rem;
-    }
-
+    padding: 1rem;
+  }
 `;
+
 export const Logo = styled(Link)`
   display: flex;
   align-items: center;

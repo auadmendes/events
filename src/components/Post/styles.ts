@@ -92,7 +92,7 @@ export const Price = styled.span`
   color: ${({ theme }) => theme.colors.white};
 
   @media (max-width: 720px) {
-    padding: 1.1rem 0.5rem;
+    //padding: 1.1rem 0.5rem;
   }
 `;
 
@@ -114,10 +114,10 @@ export const StartTime = styled.span`
   }
 
   @media (max-width: 720px) {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    height: 3.5rem;
+    p {
+      overflow: visible;
+      text-overflow: unset;
+    }
   }
 `;
 
@@ -127,7 +127,6 @@ export const EndTime = styled.span`
   padding: 0.5rem 0.5rem;
   font-size: 0.75rem;
   border-radius: 3px;
-  //background: ${({ theme }) => theme.colors.gray};
   border: 0.5px solid ${({ theme }) => theme.colors.primary};
   text-align: center;
   gap: 0.1rem;
@@ -138,10 +137,14 @@ export const EndTime = styled.span`
   }
 
   @media (max-width: 720px) {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    height: 3.5rem;
+    /* span {
+      visibility: hidden;
+      width: 0.1px;
+    } */
+    p {
+      overflow: visible;
+      text-overflow: unset;
+    }
   }
 `;
 
@@ -161,8 +164,8 @@ export const Category = styled.span`
   }
 
   @media (max-width: 720px) {
-    padding: 1.2rem 0.5rem;
-    height: 3.5rem;
+    /* padding: 1.2rem 0.5rem;
+    height: 3.5rem; */
   }
 
 `;
@@ -192,7 +195,7 @@ export const Ticket = styled.span`
   }
 
   @media (max-width: 720px) {
-    padding: 1.2rem 0.5rem;
+    //padding: 1.2rem 0.5rem;
   }
 `;
 
@@ -218,7 +221,8 @@ export const Starred = styled.div`
   }
 
   @media (max-width: 720px) {
-    padding: 1.1rem 0.5rem;
+    padding: 0;
+    border: 0;
   }
 `;
 

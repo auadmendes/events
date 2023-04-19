@@ -249,6 +249,23 @@ export function Post({ post }: PostType) {
     }
   }
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 720);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const startTime = format(new Date(post.start_time), ` dd 'de ' MMMM 'de 'yyyy 'as' HH:mm`, { locale: ptBR });
+  const startTimeShort = `${startTime.substring(0, 12)}...`;
+
+  const endTime = format(new Date(post.end_time), ` dd 'de ' MMMM 'de 'yyyy 'as' HH:mm`, { locale: ptBR });
+  const endTimeShort = `${endTime.substring(0, 12)}...`;
+
+
   useEffect(() => {
     if (session?.user) {
       setUserEmail(String(session?.user?.email))
@@ -280,13 +297,13 @@ export function Post({ post }: PostType) {
       </ImageContent>
       <InformationContainer>
         <EventDate>
-          <StartTime>
+          <StartTime onClick={() => alert(`Início ${startTime}`)}>
             <span>Início:</span>
-            {format(new Date(post.start_time), ` dd 'de ' MMMM 'de 'yyyy 'as' HH:mm`, { locale: ptBR })}
+            <p>{isMobile ? startTimeShort : startTime}</p>
           </StartTime>
-          <EndTime>
+          <EndTime onClick={() => alert(`Início ${endTime}`)}>
             <span>Termino:</span>
-            {format(new Date(post.end_time), ` dd 'de ' MMMM 'de 'yyyy 'as' HH:mm`, { locale: ptBR })}
+            <p>{isMobile ? endTimeShort : endTime}</p>
           </EndTime>
           <Category onClick={() => getLikesCount(post.id)}>{post.category.name}</Category>
           <Ticket>

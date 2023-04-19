@@ -40,6 +40,11 @@ export const Content = styled(Dialog.Content)`
     div {
       display: flex;
       gap: 0.5rem;
+      width: 100%;
+
+      input {
+        width: 100%;
+      }
     }
 
     select {

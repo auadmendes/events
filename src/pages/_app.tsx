@@ -11,7 +11,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
     <SessionProvider session={session}>
       <ThemeProvider theme={light}>
         <GlobalStyle />
-        <Header />
+        {/* <Header /> */}
         <Component {...pageProps} />
       </ThemeProvider>
     </SessionProvider>
